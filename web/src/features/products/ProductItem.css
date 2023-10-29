@@ -1,0 +1,94 @@
+.product-item-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  margin-top: 5px;
+  gap: 2rem;
+  border: 3px solid rgb(189, 188, 188);
+  border-radius: 10px;
+  background-color: #ffffff;
+  grid-row-gap: 10px;
+}
+
+.product-item-container:hover {
+  border: 3px solid rgb(150, 150, 150);
+}
+
+.product-item-button-container {
+  display: flex;
+  justify-content: right;
+  align-items: end;
+}
+
+.product-item-element-name {
+  text-decoration: none;
+  color: rgb(71, 71, 71);
+}
+
+.product-item-element-name:hover {
+  color: rgb(53, 203, 3);
+}
+
+.product-item-element {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 200px;
+  font-size: 20px;
+  height: 80px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.product-item-element-price {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 200px;
+  font-size: 20px;
+  height: 80px;
+  text-align: right;
+  vertical-align: middle;
+  font-size: 26px;
+}
+
+.product-item-button,
+.product-item-quantity-button {
+  background-color: greenyellow;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  width: 80px;
+}
+
+.product-item-quantity-button {
+  margin-left: 20px;
+  width: 40px;
+  margin-right: 0;
+}
+
+.product-item-element-img2 {
+  margin: auto;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+}
+
+.product-item-element-img-img {
+  width: 180px;
+  height: 180px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+}

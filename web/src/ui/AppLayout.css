@@ -1,0 +1,9 @@
+.main {
+  position: fixed;
+  top: 80px;
+  bottom: 80px;
+  width: 100%;
+  overflow: scroll;
+  /*background-image: linear-gradient(to right, #fae08a, #f7e9bd, #fae08a);*/
+  background-color: rgb(237, 247, 250);
+}

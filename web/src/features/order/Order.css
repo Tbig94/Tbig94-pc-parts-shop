@@ -1,0 +1,44 @@
+.order-form {
+  align-items: center;
+  width: 40%;
+  margin: auto;
+  align-items: center;
+  border: 2px solid rgb(189, 188, 188);
+  background-color: #ffffff;
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+}
+
+.order-total-price {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.order-total-price-number {
+  font-weight: 1000;
+}
+
+.order-label {
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.order-input {
+  height: 30px;
+  width: 260px;
+  margin-right: 0;
+}
+
+.order-input2 {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.order-submit-button {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+.error-container {
+  margin-top: 200px;
+}
+
+.error-container-p {
+  text-align: center;
+  font-size: 40px;
+  align-items: center;
+  margin: auto;
+}
