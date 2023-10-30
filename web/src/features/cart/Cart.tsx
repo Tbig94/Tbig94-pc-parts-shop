@@ -1,3 +1,4 @@
+import { FC, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from './cartSlice';
 import { Cart as CartType } from '../../types/cart';
@@ -6,7 +7,7 @@ import { clearCart } from './cartSlice';
 import './Cart.css';
 import Button from '../../components/Button';
 
-export default function Cart() {
+const Cart: FC = () => {
   const dispatch = useDispatch();
   const cartItems: CartType[] = useSelector(getCart);
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Cart() {
   };
 
   return (
-    <>
+    <Fragment>
       {!cartItems.length ? (
         <>
           <div className="cart-container-empty">
@@ -60,6 +61,8 @@ export default function Cart() {
           </div>
         </div>
       )}
-    </>
+    </Fragment>
   );
-}
+};
+
+export default Cart;

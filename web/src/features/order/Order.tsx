@@ -1,13 +1,13 @@
+import { ChangeEvent, FC, FormEvent, Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, getCart, clearCart } from './../cart/cartSlice.js';
 import './Order.css';
 import Button from '../../components/Button.js';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { Order as OrderType } from '../../types/order.ts';
 import { Cart as CartType } from './../../types/cart.ts';
 
-const Order = () => {
+const Order: FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,19 +20,18 @@ const Order = () => {
 
   const totalCartPrice: number = useSelector(getTotalCartPrice);
   const cart: CartType[] = useSelector(getCart);
-  let cartData: string = '';
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    for (const cartItem of cart) {
-      cartData = cartData.concat(`${cartItem.id}-${cartItem.quantity},`);
-    }
+    const cartData = cart
+      .map((item) => `${item.id}-${item.quantity}`)
+      .join(', ');
 
     const newOrder: OrderType = {
       customerName: formData.name,
@@ -72,7 +71,7 @@ const Order = () => {
   };
 
   return (
-    <div>
+    <Fragment>
       <p className="order-total-price">Total price: ${totalCartPrice}</p>
       <form className="order-form">
         <div className="order-input2">
@@ -150,7 +149,7 @@ const Order = () => {
           ></Button>
         </div>
       </form>
-    </div>
+    </Fragment>
   );
 };
 

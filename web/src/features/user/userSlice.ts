@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from './../../store';
+import { User } from '../../types/user';
 
 const userToken =
   localStorage.getItem('userToken') !== null
@@ -38,6 +40,6 @@ export const { updateToken, signOutUser } = userSlice.actions;
 
 export default userSlice.reducer;
 
-export const getToken = (state) => state.user.userToken;
+export const getToken = (state: RootState) => state.user.userToken;
 
-export const getEmail = (state) => state.user.userEmail;
+export const getEmail = (state: RootState) => state.user.userEmail;

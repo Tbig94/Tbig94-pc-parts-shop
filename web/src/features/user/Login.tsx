@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import Button from '../../components/Button';
 import './Login.css';
 import { User } from './../../types/user';
@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateToken } from './../user/userSlice';
 
-const Login = () => {
+const Login: FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,12 +21,12 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSignIn = async (e) => {
+  const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!emailPattern.test(formData.email)) {

@@ -2,8 +2,6 @@ import { User } from "./../models/user";
 import jwt from "jsonwebtoken";
 
 const login = async (req, res) => {
-  console.log(`req body: ${req.body}`);
-
   let { email, password } = req.body;
 
   let existingUser;
@@ -23,7 +21,6 @@ const login = async (req, res) => {
       { expiresIn: "1h" }
     );
   } catch (err) {
-    console.log(err);
     throw new Error("Error! Something went wrong.");
   }
 

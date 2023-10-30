@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import './Signup.css';
-import { useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { User } from '../../types/user';
 import { updateToken } from './../user/userSlice';
 
-const Signup = () => {
+const Signup: FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,19 +14,18 @@ const Signup = () => {
 
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [signupError, setsignupError] = useState(false);
 
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!emailPattern.test(formData.email)) {

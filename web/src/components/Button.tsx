@@ -42,7 +42,6 @@ const useStyles = createUseStyles<string, StyleProps>(() => ({
   },
 }));
 
-// extendáljuk az iconok propsaival, szóval ha meghívjuk a <Button -t akkor az svg iconnak is tudunk adni propsot
 interface Props extends SvgIconProps {
   name: string;
   text: string;

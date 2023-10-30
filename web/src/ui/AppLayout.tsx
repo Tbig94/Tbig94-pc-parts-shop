@@ -2,11 +2,11 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import CartOverview from '../features/cart/CartOverview';
 import './AppLayout.css';
+import { FC, Fragment } from 'react';
 
-const AppLayout = () => {
+const AppLayout: FC = () => {
   return (
-    <>
-      {/* <Loader></Loader> */}
+    <Fragment>
       <div className="app-layout">
         <Header></Header>
 
@@ -16,7 +16,7 @@ const AppLayout = () => {
 
         <CartOverview></CartOverview>
       </div>
-    </>
+    </Fragment>
   );
 };
 export default AppLayout;

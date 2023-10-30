@@ -1,11 +1,12 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import './CartOverview.css';
 import { getTotalCartQuantity, getTotalCartPrice } from './cartSlice';
 import { Link } from 'react-router-dom';
 
-const CartOverview = () => {
-  const totalCartItems: number = useSelector(getTotalCartQuantity);
-  const totalCartPrice: number = useSelector(getTotalCartPrice);
+const CartOverview: FC = () => {
+  const totalCartItems = useSelector(getTotalCartQuantity);
+  const totalCartPrice = useSelector(getTotalCartPrice);
 
   return (
     <div className="cartInfo">

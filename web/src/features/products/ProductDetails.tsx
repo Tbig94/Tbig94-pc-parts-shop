@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, Fragment } from 'react';
-import { Product } from '../../types/cartProduct';
+import { useState, useEffect, Fragment, FC } from 'react';
+import { CartProduct as Product } from '../../types/cartProduct';
 import './ProductDetails.css';
 import Button from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,13 +23,15 @@ const useStyles = createUseStyles({
   },
 });
 
-const ProductDetails = () => {
+const ProductDetails: FC = () => {
   const dispatch = useDispatch();
   const [products, setProducts] = useState<Product[]>([]);
   const { id } = useParams();
   const classes = useStyles();
 
-  let currItemCount = useSelector((state) => countElementsByFilter(state, id));
+  const currItemCount = useSelector((state) =>
+    countElementsByFilter(state, id)
+  );
 
   const fetchUserData = () => {
     fetch('http://localhost:3000/api/v1/products')
@@ -56,7 +58,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <>
+    <Fragment>
       {currentProduct && (
         <div className="product-details-container">
           <img
@@ -92,7 +94,7 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
-    </>
+    </Fragment>
   );
 };
 

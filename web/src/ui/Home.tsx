@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import './Home.css';
 import ProductItem from './../features/products/ProductItem';
 import { useState, useEffect } from 'react';
 
-const Home = () => {
+const Home: FC = () => {
   const [products, setProducts] = useState([]);
 
   const fetchUserData = () => {

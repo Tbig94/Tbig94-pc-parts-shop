@@ -36,7 +36,6 @@ const icons: Icons = {
   ),
 };
 
-// style props
 interface StyleProps {
   iconWidth: string | number;
   iconHeight: string | number;
@@ -51,17 +50,12 @@ const useStyles = createUseStyles<string, StyleProps>(() => ({
     width: (props) => props.iconWidth,
     height: (props) => props.iconHeight,
 
-    // kiválasztjuk az svg-t a child elementek közül
     '& > svg': (props) => ({
       fill: props.iconFill,
     }),
   },
 }));
 
-// komponens props-ok,
-// name: az Icons type kulcsai, Record<string, ReactElement> ugyan az mint { [key: string]: ReactElement },
-// ez annyit jelent, hogy aobject elemeit sztringel érheted el, és ReactElementet ad vissza, pl: Icons["Add"]
-// width, height egyértelmű, fill a szín, ezek opcionálisak, default értéket kapnak ha nem adjuk meg
 export interface SvgIconProps {
   iconName: keyof Icons;
   iconWidth?: string | number;
@@ -69,15 +63,12 @@ export interface SvgIconProps {
   iconFill?: string;
 }
 
-// ikonok itt: https://fonts.google.com/icons
-// átalakítani jsx-re: https://svg2jsx.com/
 const SvgIcon: FC<SvgIconProps> = ({
   iconName,
   iconWidth = 30,
   iconHeight = 30,
   iconFill = 'white',
 }) => {
-  //itt átadjuk a width height fill-t a jss-nek
   const classes = useStyles({ iconWidth, iconHeight, iconFill });
 
   return <div className={classes.icon}>{icons[iconName]}</div>;

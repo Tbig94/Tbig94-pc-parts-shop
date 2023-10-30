@@ -1,8 +1,8 @@
 import ProductItem from './ProductItem';
 import './ProductList.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
-const ProductList = () => {
+const ProductList: FC = () => {
   const [products, setProducts] = useState([]);
 
   const fetchUserData = () => {

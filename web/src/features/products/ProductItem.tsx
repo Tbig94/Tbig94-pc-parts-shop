@@ -2,10 +2,8 @@ import { Cart } from '../../types/cart';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addItem,
-  deleteItem,
   countElementsByFilter,
   decreaseItemQuantity,
-  increaseItemQuantity,
 } from '../cart/cartSlice';
 import './ProductItem.css';
 import { FC, Fragment } from 'react';
@@ -31,7 +29,6 @@ const useStyles = createUseStyles({
 
 const ProductItem: FC<CartProductItemProps> = ({ product }) => {
   const dispatch = useDispatch();
-  //const {
 
   const {
     id,
@@ -45,10 +42,11 @@ const ProductItem: FC<CartProductItemProps> = ({ product }) => {
     numberOfClicks,
   } = product;
 
-  //} //= products[0];
   const classes = useStyles();
 
-  let currItemCount = useSelector((state) => countElementsByFilter(state, id));
+  const currItemCount = useSelector((state) =>
+    countElementsByFilter(state, id)
+  );
 
   const handleAddToCart = () => {
     const newItem: Cart = {
@@ -72,10 +70,9 @@ const ProductItem: FC<CartProductItemProps> = ({ product }) => {
       description,
       numberOfClicks: numberOfClicks + 1,
     };
-    console.log(`item click, number: ${currentProduct.numberOfClicks}`);
 
     try {
-      await fetch(`http://localhost:3000/api/v1/products/`, {
+      await fetch(`http://localhost:3000/api/v1/products`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json',
@@ -87,19 +84,9 @@ const ProductItem: FC<CartProductItemProps> = ({ product }) => {
     }
   };
 
-  const handleRemoveFromCart = () => {
-    dispatch(deleteItem(id));
-  };
-
-  const handleIncreaseCount = () => {
-    dispatch(increaseItemQuantity(id));
-  };
-
   const handleDecreaseCount = () => {
     dispatch(decreaseItemQuantity(id));
   };
-
-  const handleCountChange = () => {};
 
   return (
     <ul>
@@ -121,7 +108,7 @@ const ProductItem: FC<CartProductItemProps> = ({ product }) => {
             className="product-item-element-img-img"
           ></img>
         </div>
-        {minPrice !== '0' && (
+        {minPrice !== 0 && (
           <div className="product-item-button-container">
             <Fragment>
               <Button
