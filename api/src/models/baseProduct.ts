@@ -32,14 +32,14 @@ export class BaseProduct extends Model<BaseProduct> {
   rating: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
   })
-  minPrice: string;
+  minPrice: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
   })
-  maxPrice: string;
+  maxPrice: number;
 
   @Column({
     type: DataType.TEXT("long"),

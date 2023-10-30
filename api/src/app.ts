@@ -6,10 +6,13 @@ import orderRouter from "./routes/orderRouter";
 import userRouter from "./routes/userRouter";
 import testRouter from "./routes/testRouter";
 import { init, seed } from "./db/sequelizeInit";
+import bodyParser from "body-parser";
 
 const app = express();
 app.use(json());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 init();
 
