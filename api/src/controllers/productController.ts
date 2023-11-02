@@ -1,9 +1,9 @@
 import { BaseProduct } from "./../models/baseProduct";
 import ProductService from "./../services/productService";
-import * as productsSample from "./../data/apiResponseSample.json";
 import { AxiosResponse } from "axios";
+import { Request, Response } from "express";
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (req: Request, res: Response) => {
   try {
     const products = await BaseProduct.findAll();
     res.status(200).json({
@@ -17,7 +17,7 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-const deleteAllProducts = async (req, res) => {
+const deleteAllProducts = async (req: Request, res: Response) => {
   try {
     await BaseProduct.destroy({
       where: {},
@@ -32,7 +32,7 @@ const deleteAllProducts = async (req, res) => {
   }
 };
 
-const getMostPopularProducts = async (req, res) => {
+const getMostPopularProducts = async (req: Request, res: Response) => {
   try {
     const products = await BaseProduct.findAll({
       order: [["numberOfClicks", "DESC"]],
@@ -56,7 +56,7 @@ const getMostPopularProducts = async (req, res) => {
   }
 };
 
-const updateProduct = async (req: { body: BaseProduct }, res: any) => {
+const updateProduct = async (req: Request, res: Response) => {
   try {
     await BaseProduct.update(
       { numberOfClicks: req.body.numberOfClicks },
@@ -67,7 +67,7 @@ const updateProduct = async (req: { body: BaseProduct }, res: any) => {
   }
 };
 
-const startSync = async (req, res) => {
+const startSync = async (req: Request, res: Response) => {
   try {
     const products: AxiosResponse = await ProductService.fetchProductData();
     await ProductService.saveProducts(products);

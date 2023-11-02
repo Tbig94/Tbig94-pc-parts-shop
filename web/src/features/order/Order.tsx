@@ -1,6 +1,14 @@
-import { ChangeEvent, FC, FormEvent, Fragment, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  Fragment,
+  useState,
+  useEffect,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalCartPrice, getCart, clearCart } from './../cart/cartSlice.js';
+import { getTotalCartPrice, getCart, clearCart } from './../cart/cartSlice';
+import { getToken, getEmail } from './../user/userSlice.ts';
 import './Order.css';
 import Button from '../../components/Button.js';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +25,19 @@ const Order: FC = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const totalCartPrice: number = useSelector(getTotalCartPrice);
   const cart: CartType[] = useSelector(getCart);
+
+  const email = useSelector(getEmail);
+  const token = useSelector(getToken);
+
+  useEffect(() => {
+    if (email && token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -72,83 +90,89 @@ const Order: FC = () => {
 
   return (
     <Fragment>
-      <p className="order-total-price">Total price: ${totalCartPrice}</p>
-      <form className="order-form">
-        <div className="order-input2">
-          <label className="order-label">Name</label>
-          <input
-            name="name"
-            value={formData.name}
-            className="order-input"
-            type="text"
-            placeholder="John Doe"
-            onChange={handleInputChange}
-          />
-        </div>
+      {isLoggedIn ? (
+        <Fragment>
+          <p className="order-total-price">Total price: ${totalCartPrice}</p>
+          <form className="order-form">
+            <div className="order-input2">
+              <label className="order-label">Name</label>
+              <input
+                name="name"
+                value={formData.name}
+                className="order-input"
+                type="text"
+                placeholder="John Doe"
+                onChange={handleInputChange}
+              />
+            </div>
 
-        <div className="order-input2">
-          <label className="order-label">Email address</label>
-          <input
-            name="email"
-            value={formData.email}
-            className="order-input"
-            type="email"
-            placeholder="johndoe@email.com"
-            onChange={handleInputChange}
-          ></input>
-        </div>
+            <div className="order-input2">
+              <label className="order-label">Email address</label>
+              <input
+                name="email"
+                value={formData.email}
+                className="order-input"
+                type="email"
+                placeholder="johndoe@email.com"
+                onChange={handleInputChange}
+              ></input>
+            </div>
 
-        <div className="order-input2">
-          <label className="order-label">Phone number</label>
-          <input
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            className="order-input"
-            type="text"
-            placeholder="+36123456789"
-            onChange={handleInputChange}
-          ></input>
-        </div>
+            <div className="order-input2">
+              <label className="order-label">Phone number</label>
+              <input
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                className="order-input"
+                type="text"
+                placeholder="+36123456789"
+                onChange={handleInputChange}
+              ></input>
+            </div>
 
-        <div className="order-input2">
-          <label className="order-label">Country</label>
-          <select
-            className="order-input"
-            id="country"
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-          >
-            <option value="volvo">Hungary</option>
-            <option value="saab">USA</option>
-            <option value="fiat">Finland</option>
-            <option value="audi">Germany</option>
-          </select>
-        </div>
+            <div className="order-input2">
+              <label className="order-label">Country</label>
+              <select
+                className="order-input"
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+              >
+                <option value="volvo">Hungary</option>
+                <option value="saab">USA</option>
+                <option value="fiat">Finland</option>
+                <option value="audi">Germany</option>
+              </select>
+            </div>
 
-        <div className="order-input2">
-          <label className="order-label">Address</label>
-          <input
-            name="address"
-            value={formData.address}
-            className="order-input"
-            type="text"
-            placeholder="City, street, house number"
-            onChange={handleInputChange}
-          ></input>
-        </div>
-        <div className="order-submit-button">
-          <Button
-            name="SubmitButton"
-            text="Submit order"
-            onClick={handleSubmit}
-            radiusRight
-            radiusLeft
-            width={130}
-            height={35}
-          ></Button>
-        </div>
-      </form>
+            <div className="order-input2">
+              <label className="order-label">Address</label>
+              <input
+                name="address"
+                value={formData.address}
+                className="order-input"
+                type="text"
+                placeholder="City, street, house number"
+                onChange={handleInputChange}
+              ></input>
+            </div>
+            <div className="order-submit-button">
+              <Button
+                name="SubmitButton"
+                text="Submit order"
+                onClick={handleSubmit}
+                radiusRight
+                radiusLeft
+                width={130}
+                height={35}
+              ></Button>
+            </div>
+          </form>
+        </Fragment>
+      ) : (
+        <div>You need to log in to order products.</div>
+      )}
     </Fragment>
   );
 };

@@ -1,6 +1,7 @@
+import { Request, Response } from "express";
 import { Order } from "./../models/order";
 
-const createOrder = async (req, res) => {
+const createOrder = async (req: Request, res: Response) => {
   try {
     const order = Order.build({
       customerName: req.body.customerName,
@@ -13,6 +14,7 @@ const createOrder = async (req, res) => {
     });
 
     await order.save();
+
     res.status(200).json({
       status: "success",
       data: {

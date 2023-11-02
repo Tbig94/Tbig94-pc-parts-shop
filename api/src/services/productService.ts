@@ -60,9 +60,9 @@ const fetchProductData = async () => {
 
 const saveProducts = async (productsResponse: AxiosResponse) => {
   for (const el of productsResponse.data) {
-    let minPrice;
-    let maxPrice;
-    let image;
+    let minPrice: number;
+    let maxPrice: number;
+    let image: string;
     if (el.typical_price_range) {
       if (el.typical_price_range[0]) {
         minPrice = el.typical_price_range[0].replace(/[^0-9]/g, "");
@@ -96,7 +96,11 @@ const saveProducts = async (productsResponse: AxiosResponse) => {
   }
 };
 
-async function checkProductResponse(el, minPrice, maxPrice) {
+async function checkProductResponse(
+  el: ProductData,
+  minPrice: number,
+  maxPrice: number
+) {
   const existingProduct = await BaseProduct.findOne({
     where: { id: el.product_id },
   });

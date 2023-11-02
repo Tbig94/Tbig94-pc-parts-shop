@@ -1,4 +1,6 @@
-const roleTestUser = (req, res) => {
+import { Request, Response } from "express";
+
+const roleTestUser = (req: Request, res: Response) => {
   try {
     res.status(200).json({
       status: "success",
@@ -8,7 +10,7 @@ const roleTestUser = (req, res) => {
   }
 };
 
-const roleTestAdmin = (req, res) => {
+const roleTestAdmin = (req: Request, res: Response) => {
   try {
     res.status(200).json({
       status: "success",
